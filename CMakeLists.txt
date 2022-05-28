@@ -107,7 +107,7 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES deBug
   CATKIN_DEPENDS actionlib roscpp rospy std_msgs nav_msgs
-  DEPENDS system_lib
+  DEPENDS 
 )
 
 ###########
@@ -119,23 +119,30 @@ catkin_package(
 include_directories(
  include
   ${catkin_INCLUDE_DIRS}
-  include/deBUG/dorLib/src
+  include/deBUG/dorLib
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   ${PROJECT_NAME}/dCorelib.cpp
+# add_library(deBUG
+#   ${PROJECT_NAME}/deBUG/dorLib
+#   SOURCES dCorelib.cpp dLinearAlg.cpp
 # )
+## Specify libraries to link a library or executable target against
+## Declare a C++ executable
+## With catkin_make all packages are built within a single CMake context
+## The recommended prefix ensures that target names across packages don't collide
+add_executable(test_node src/main.cpp)
 
+# target_link_libraries(test_node
+#   ${catkin_LIBRARIES}
+#   ${PROJECT_NAME}/deBUG/dorLib
+# )
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/main.cpp)
+
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -147,10 +154,7 @@ add_executable(${PROJECT_NAME}_node src/main.cpp)
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_node
-  ${catkin_LIBRARIES}
-)
+
 
 #############
 ## Install ##
