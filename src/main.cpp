@@ -1,4 +1,5 @@
 #include "dorLib/dLinearAlg.h"
+#include "ros/ros.h"
 //#include "dCorelib.h"
 //#include "dVariant.h"
 #include <iostream>

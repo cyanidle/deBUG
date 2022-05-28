@@ -20,17 +20,19 @@ include_directories(
 )
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES deBUG
   CATKIN_DEPENDS actionlib roscpp rospy std_msgs nav_msgs
   DEPENDS 
 )
 #Declare a C++ library
 add_library(deBUG
-  ${PROJECT_SOURCE_DIR}/include/dorLib/dCorelib
-  ${PROJECT_SOURCE_DIR}/include/dorLib/dLinearAlg
+  ${PROJECT_SOURCE_DIR}/include/dorLib/dCorelib.cpp
+  ${PROJECT_SOURCE_DIR}/include/dorLib/dLinearAlg.cpp
 )
+# add_library(gtest
+#   ${PROJECT_SOURCE_DIR}/include/googletest/googletest/src/gtest.cc
+#   ${PROJECT_SOURCE_DIR}/include/googletest/googlemock/src/gmock.cc
+# )
 add_executable(test_node src/main.cpp)
-
 target_link_libraries(test_node
   ${catkin_LIBRARIES}
   deBUG
@@ -38,12 +40,13 @@ target_link_libraries(test_node
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
-
-## Uncomment this if the package has a setup.py. This macro ensures
-## modules and global scripts declared therein get installed
-## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-# catkin_python_setup()
-
+## Add gtest based cpp test target and link libraries
+if (CATKIN_ENABLE_TESTING)
+  catkin_add_gtest(matrix_test tests/gtest_dmatrix.cpp)
+  target_link_libraries(matrix_test ${catkin_LIBRARIES})
+endif()
+catkin_python_setup()
+ 
 ################################################
 ## Declare ROS messages, services and actions ##
 ################################################
@@ -204,12 +207,6 @@ target_link_libraries(test_node
 #############
 ## Testing ##
 #############
-
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_deBug.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)

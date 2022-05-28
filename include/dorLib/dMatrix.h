@@ -1,5 +1,4 @@
 #pragma once
-//#include "Macros.h"
 #include <exception>
 #include <memory>
 #include <array>
@@ -113,45 +112,10 @@ public:
 		}
 		return result;
 	}
-
 	// Used to unwrap the value in the 1x1 matrix
 	inline Type _unwrap() {
 		return _get_arr()[0][0];
 	}
-
-	template <int src_rows, int src_cols>
-	inline dMatrix<Type, src_rows, cols> operator*(dMatrix<Type, src_rows, src_cols>& src) {
-		if (m_rows != src.get_cols())
-			throw std::runtime_error(std::string("Cant multiply matrices of these sizes! (Or you did try Matrix * Vector? -> Should be Vector * Matrix)"));
-		dMatrix<Type, src_rows, cols> result;  // Yesli viletel, to ti lox yopta
-		for (int rescol = 0; rescol < cols; rescol++) {
-			for (int resrow = 0; resrow < src_rows; resrow++) {
-				for (int src_row = 0 ; src_row < src.get_rows(); src_row++) {
-					auto base = this->at(src_row, rescol);
-					auto other = src.at(resrow, src_row);
-					result.at(resrow, rescol) += (base * other);
-				}	
-			}
-		}
-		return result;
-	};
-	template <int src_rows, int src_cols>
-	inline dMatrix<Type, src_rows, cols> operator*(dMatrix<Type, src_rows, src_cols>&& src) {
-		if (m_rows != src.get_cols())
-			throw std::runtime_error(std::string("Cant multiply matrices of these sizes! (Or you did try Matrix * Vector? Should be Vector * Matrix)"));
-		dMatrix<Type, src_rows, cols> result;  // Yesli viletel, to ti lox yopta
-		for (int rescol = 0; rescol < cols; rescol++) {
-			for (int resrow = 0; resrow < src_rows; resrow++) {
-				for (int src_row = 0; src_row < src.get_rows(); src_row++) {
-					auto base = this->at(src_row, rescol);
-					auto other = src.at(resrow, src_row);
-					result.at(resrow, rescol) += (base * other);
-				}
-			}
-		}
-		return result;
-	};
-
 	INTERNAL_DMAKE_MATR_OP_MATR(-)
 	INTERNAL_DMAKE_MATR_OP_MATR(+)
 	INTERNAL_DMAKE_MATR_OP_MATR(*)
