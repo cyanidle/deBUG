@@ -5,10 +5,10 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-	dVect var;
-	dVect vect(dVect(0,0));
+	dTransform2d var;
+	dVect vect(2,2);
 	auto newv = vect + 5;
 	newv = vect - 5;
 	newv += newv;
-	printf("kek");
+	printf("kek\n");
 }
