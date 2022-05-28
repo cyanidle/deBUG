@@ -14,7 +14,27 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
 )
+include_directories(
+ include
+  ${catkin_INCLUDE_DIRS}
+)
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES deBUG
+  CATKIN_DEPENDS actionlib roscpp rospy std_msgs nav_msgs
+  DEPENDS 
+)
+#Declare a C++ library
+add_library(deBUG
+  ${PROJECT_SOURCE_DIR}/include/dorLib/dCorelib
+  ${PROJECT_SOURCE_DIR}/include/dorLib/dLinearAlg
+)
+add_executable(test_node src/main.cpp)
 
+target_link_libraries(test_node
+  ${catkin_LIBRARIES}
+  deBUG
+)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -103,12 +123,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES deBug
-  CATKIN_DEPENDS actionlib roscpp rospy std_msgs nav_msgs
-  DEPENDS 
-)
+
 
 ###########
 ## Build ##
@@ -116,27 +131,15 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(
- include
-  ${catkin_INCLUDE_DIRS}
-  include/deBUG/dorLib
-)
 
-## Declare a C++ library
-# add_library(deBUG
-#   ${PROJECT_NAME}/deBUG/dorLib
-#   SOURCES dCorelib.cpp dLinearAlg.cpp
-# )
+
+
 ## Specify libraries to link a library or executable target against
 ## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
+## With catkin_make all packages are built within a sinfgle CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(test_node src/main.cpp)
 
-# target_link_libraries(test_node
-#   ${catkin_LIBRARIES}
-#   ${PROJECT_NAME}/deBUG/dorLib
-# )
+
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure

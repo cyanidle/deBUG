@@ -40,7 +40,7 @@ VECTOR_TYPE dVect::get_scale() const
 VECTOR_TYPE& dVect::operator[](int ind)
 {
 	if ((ind > 1) or (ind < 0))
-		throw std::exception("Vector index out of range");
+		throw std::runtime_error("Vector index out of range");
 	return this->_get_arr()[0][ind];
 }
 
@@ -151,17 +151,17 @@ dVect& operator/=(dVect& base, const VECTOR_TYPE& src)
 
 int operator+(const dVect& base, const dTransform2d& src)
 {
-	throw std::exception("Not allowed!");
+	throw std::runtime_error("Not allowed!");
 }
 
 int operator-(const dVect& base, const dTransform2d& src)
 {
-	throw std::exception("Not allowed!");
+	throw std::runtime_error("Not allowed!");
 }
 
 dVect operator/(const dVect& base, const dVect& src)
 {
-	throw std::exception("Not allowed!");
+	throw std::runtime_error("Not allowed!");
 }
 
 dTransform2d::dTransform2d(VECTOR_TYPE rotation) : 

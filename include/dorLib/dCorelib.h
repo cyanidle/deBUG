@@ -5,6 +5,7 @@
 #include <queue>
 #include <deque>
 #include <vector>
+#include <condition_variable>
 #include "dLinearAlg.h"
 #include "dVariant.h"
 class Worker

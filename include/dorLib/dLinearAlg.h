@@ -1,6 +1,6 @@
 #pragma once
 #include "dMatrix.h"
-
+#include <cmath>
 #define VECTOR_TYPE float
 #define D_PI 3.1415926535f
 typedef dMatrix<VECTOR_TYPE, 3, 1> base_vect;

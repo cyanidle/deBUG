@@ -1,4 +1,4 @@
-#include "dLinearAlg.h"
+#include "dorLib/dLinearAlg.h"
 //#include "dCorelib.h"
 //#include "dVariant.h"
 #include <iostream>
